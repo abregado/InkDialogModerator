@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/InkDialogModerator/InkDialogModerator/CutscenePanelUITK/stylesheet.uss?fileID=7433441132597879392&amp;guid=ce7a153077bbb634a9eadde8d4760d5e&amp;type=3#stylesheet" />
+</ui:UXML>

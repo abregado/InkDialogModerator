@@ -37,7 +37,6 @@ public static class ModeratorEvents {
         OnRequestDialogContinue?.Invoke();
     }
 
-
     public delegate void RequestCutscene(int storyIndex, string startKnot);
     public static event RequestCutscene OnRequestCutscene;
     public static void TriggerOnRequestCutscene(int storyIndex, string startKnot) {
@@ -53,4 +52,15 @@ public static class ModeratorEvents {
         OnTagInvoked?.Invoke(tag, parameters);
     }
     
+    public delegate void RequestStoryPause();
+    public static event RequestStoryPause OnRequestStoryPause;
+    public static void TriggerOnRequestStoryPause() {
+        OnRequestStoryPause?.Invoke();
+    }
+    
+    public delegate void RequestStoryResume();
+    public static event RequestStoryResume OnRequestStoryResume;
+    public static void TriggerOnRequestStoryResume() {
+        OnRequestStoryResume?.Invoke();
+    }
 }

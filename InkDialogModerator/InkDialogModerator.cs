@@ -17,6 +17,8 @@ public class InkDialogModerator : MonoBehaviour
 
     private Story _story;
 
+    public bool storyPaused;
+
     void Awake() {
         _scribe = new StoryScribe();
     }
@@ -25,12 +27,16 @@ public class InkDialogModerator : MonoBehaviour
         ModeratorEvents.OnRequestCutscene += BeginStory;
         ModeratorEvents.OnChoiceMade += ChoiceMadeCallback;
         ModeratorEvents.OnRequestDialogContinue += ContinueCallback;
+        ModeratorEvents.OnRequestStoryPause += PauseStory;
+        ModeratorEvents.OnRequestStoryResume += ResumeStory;
     }
 
     private void OnDisable() {
         ModeratorEvents.OnRequestCutscene -= BeginStory;
         ModeratorEvents.OnChoiceMade -= ChoiceMadeCallback;
         ModeratorEvents.OnRequestDialogContinue -= ContinueCallback;
+        ModeratorEvents.OnRequestStoryPause -= PauseStory;
+        ModeratorEvents.OnRequestStoryResume -= ResumeStory;
     }
 
     private void Start() {
@@ -80,6 +86,9 @@ public class InkDialogModerator : MonoBehaviour
     }
     
     public void ContinueCallback() {
+        if (storyPaused) {
+            return;
+        }
         if (_story.canContinue) {
             AdvanceDialogue();
             return;
@@ -125,6 +134,14 @@ public class InkDialogModerator : MonoBehaviour
     
     private void SaveStoryVariables() {
         _scribe.Save(_story);
+    }
+
+    private void PauseStory() {
+        storyPaused = true;
+    }
+
+    private void ResumeStory() {
+        storyPaused = false;
     }
 }
  
